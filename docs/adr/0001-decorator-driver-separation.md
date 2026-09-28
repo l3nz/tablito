@@ -1,0 +1,3 @@
+# Separate Decorator (what) from Driver (how)
+
+A Decorator produces a Cell Descriptor — the printable contents plus semantic styling hints (Alignment, Weight, Alarm, Min-visible-width) — and never knows about terminal widths, HTML markup, or any other rendering concern. A Driver consumes Cell Descriptors and decides how to realize them in its own medium (e.g. Alarm=red becomes a colored cell background in stdout, or a CSS class in HTML), and handles wrapping/truncation itself. We chose this split, rather than making Decorators driver-aware or Drivers styling-aware, so that a new Driver can be added without touching any table's Decorators, and so semantic styling stays meaningful across every Driver instead of being tied to one rendering technology.

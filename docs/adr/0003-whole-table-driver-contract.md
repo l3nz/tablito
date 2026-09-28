@@ -1,0 +1,3 @@
+# Whole-table driver contract, not streaming
+
+A Driver's contract is a single call that receives the fully prepared table (Columns, Headers, and every Row's Cell Descriptors) and returns the rendered output, rather than a streaming/piecewise contract (start/renderHeader/renderRow/end) that would let a Driver write incrementally. Neither of the two reference Drivers (stdout with ANSI coloring, HTML) needs incremental output, and a single-call contract is simpler to implement identically across every language's implementation. If a future Driver genuinely needs to stream (e.g. writing very large tables without buffering), this contract will need to be revisited.
